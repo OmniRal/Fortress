@@ -278,43 +278,11 @@
 													]
 												},
 												{
-													"name": "LevelEnum",
-													"className": "ModuleScript",
-													"children": [],
-													"filePaths": [
-														"Scripts/ReplicatedStorage/SharedModules/Info/CustomEnum/LevelEnum.lua"
-													]
-												},
-												{
-													"name": "QuestEnum",
-													"className": "ModuleScript",
-													"children": [],
-													"filePaths": [
-														"Scripts/ReplicatedStorage/SharedModules/Info/CustomEnum/QuestEnum.lua"
-													]
-												},
-												{
-													"name": "RelicEnum",
-													"className": "ModuleScript",
-													"children": [],
-													"filePaths": [
-														"Scripts/ReplicatedStorage/SharedModules/Info/CustomEnum/RelicEnum.lua"
-													]
-												},
-												{
 													"name": "UnitEnum",
 													"className": "ModuleScript",
 													"children": [],
 													"filePaths": [
 														"Scripts/ReplicatedStorage/SharedModules/Info/CustomEnum/UnitEnum.lua"
-													]
-												},
-												{
-													"name": "WeaponEnum",
-													"className": "ModuleScript",
-													"children": [],
-													"filePaths": [
-														"Scripts/ReplicatedStorage/SharedModules/Info/CustomEnum/WeaponEnum.lua"
 													]
 												}
 											],
@@ -328,14 +296,6 @@
 											"children": [],
 											"filePaths": [
 												"Scripts/ReplicatedStorage/SharedModules/Info/ItemInfo.lua"
-											]
-										},
-										{
-											"name": "LevelInfo",
-											"className": "ModuleScript",
-											"children": [],
-											"filePaths": [
-												"Scripts/ReplicatedStorage/SharedModules/Info/LevelInfo.lua"
 											]
 										},
 										{
@@ -355,27 +315,11 @@
 											]
 										},
 										{
-											"name": "RelicInfo",
-											"className": "ModuleScript",
-											"children": [],
-											"filePaths": [
-												"Scripts/ReplicatedStorage/SharedModules/Info/RelicInfo.lua"
-											]
-										},
-										{
 											"name": "ShopInfo",
 											"className": "ModuleScript",
 											"children": [],
 											"filePaths": [
 												"Scripts/ReplicatedStorage/SharedModules/Info/ShopInfo.lua"
-											]
-										},
-										{
-											"name": "WeaponInfo",
-											"className": "ModuleScript",
-											"children": [],
-											"filePaths": [
-												"Scripts/ReplicatedStorage/SharedModules/Info/WeaponInfo.lua"
 											]
 										}
 									],
@@ -2326,16 +2270,7 @@
 								{
 									"name": "Info",
 									"className": "Folder",
-									"children": [
-										{
-											"name": "NPCInfo",
-											"className": "ModuleScript",
-											"children": [],
-											"filePaths": [
-												"Scripts/ServerScriptService/ServerModules/Info/NPCInfo.lua"
-											]
-										}
-									],
+									"children": [],
 									"filePaths": [
 										"Scripts/ServerScriptService/ServerModules/Info"
 									]

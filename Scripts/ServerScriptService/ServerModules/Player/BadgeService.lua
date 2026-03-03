@@ -53,7 +53,7 @@ function BadgeService:Init()
         if not Info.Complete or BadgeInfo[BadgeName].RewardType == "None" then return end
         if Info.RewardClaimed then return end
 
-        DataService:UpdateBadgeProgress(Player, BadgeName, 0, true)
+        --DataService:UpdateBadgeProgress(Player, BadgeName, 0, true)
 
         return 1
     end)

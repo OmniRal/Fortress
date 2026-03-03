@@ -108,7 +108,7 @@ local function SetCollisions(Model: Instance, Folder: Instance)
     end
 end
 
-local function ToggleMotors(Motors: table, Toggle: boolean)
+local function ToggleMotors(Motors: {}, Toggle: boolean)
     for Part, Motor in pairs(Motors) do
         if Part ~= "Root" then
             Motor.Enabled = Toggle
