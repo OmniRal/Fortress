@@ -2,15 +2,15 @@
 
 local ProjectileService = {}
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+--local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 local Workspace = game:GetService("Workspace")
 
-local New = require(ReplicatedStorage.Source.Pronghorn.New)
+--local New = require(ReplicatedStorage.Source.Pronghorn.New)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-local Utility = require(ReplicatedStorage.Source.SharedModules.Other.Utility)
+--local Utility = require(ReplicatedStorage.Source.SharedModules.Other.Utility)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -111,7 +111,7 @@ function ProjectileService:New(Owner: Player | Model, Start: Vector3, Goal: Vect
     if TotalSteps > 1 then
         task.spawn(function()
             --task.wait(2)
-            for x = 1, TotalSteps do
+            for _ = 1, TotalSteps do
                 task.wait()
 
                 for _, Shot : BasePart in Shots do

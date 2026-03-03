@@ -5,7 +5,7 @@
 local RagdollService = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local PhysicsService = game:GetService("PhysicsService")
+--local PhysicsService = game:GetService("PhysicsService")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,21 +40,22 @@ local ModelCollisions = {
 	{"RightUpperLeg",   "LowerTorso", "LeftUpperLeg", "UpperTorso"}
 }
 
-local Sides = {-1, 1}
-local RNG = Random.new()
+--local Sides = {-1, 1}
+--local RNG = Random.new()
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -----------------
 -- Private API --
 -----------------
 
-local function GetAccessoryAttachment0(Character: Instance, Name: string)
+local function GetAccessoryAttachment0(Character: Instance, Name: string): Attachment?
     for _, Part in pairs(Character:GetChildren()) do
         local Attachment = Part:FindFirstChild(Name)
-        if Attachment then
-            return Attachment
-        end
+        if not Attachment then continue end
+        return Attachment
     end
+
+    return
 end
 
 -- Create joints for the accessories.

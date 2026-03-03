@@ -333,7 +333,7 @@ function UnitValuesService:CleanAllEffectsWithNames(Unit: Player | Model, Effect
 
     pcall(function()
         local CleanThese = {}
-        for Num, Effect in ipairs(UnitValues.Effects) do
+        for _, Effect in ipairs(UnitValues.Effects) do
             if Effect.Name ~= EffectName then continue end
             if Effect.Folder then
                 Effect.Folder:SetAttribute("Clean", true)
@@ -363,7 +363,7 @@ function UnitValuesService:CleanAllEffects(Unit: Player | Model, Only: string?)
 
     pcall(function()
         local CleanThese = {}
-        for Num, Effect : UnitEnum.Effect in ipairs(UnitValues.Effects) do
+        for _, Effect : UnitEnum.Effect in ipairs(UnitValues.Effects) do
             if not Effect.Folder then continue end
             if Only == "Buffs" then
                 if not Effect.IsBuff then continue end
@@ -582,7 +582,7 @@ function UnitValuesService:GetAttributes(Unit: Player | Model | string, SinlgeAt
     end
 end
 
-function UnitValuesService:New(Unit: Player | Model, BaseAttributes: {}?)
+function UnitValuesService:New(Unit: Player | Model, StartAttributes: {}?)
     if AllValues[Unit] then
         warn("Attribute Values for ", Unit.Name, " already exists.")
         return
@@ -602,8 +602,8 @@ function UnitValuesService:New(Unit: Player | Model, BaseAttributes: {}?)
         CooldownReduction = 0,
     }
     
-    if BaseAttributes then
-        for Key, Num in BaseAttributes do
+    if StartAttributes then
+        for Key, Num in StartAttributes do
             if not Base[Key] then continue end
             Base[Key] = Num
         end

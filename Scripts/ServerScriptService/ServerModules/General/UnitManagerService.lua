@@ -126,6 +126,10 @@ end
 function UnitManagerService:ApplyDamage(Source: Player | Model | string, Victim: Player | Model, DamageAmount: number, DamageName: string, DamageType: string?, CritPossible: boolean?)
     if not Source or not Victim then return end
 
+    if DamageType or CritPossible then
+        print("")
+    end
+
     local VictimModel = Victim
     if Victim:IsA("Player") then
         VictimModel = Victim.Character
@@ -214,6 +218,9 @@ end
 
 function UnitManagerService:ApplyManaGain(Source: Player | Model | string, Receiver: Player | Model, Amount: number, GainName: string?)
     if not Source or not Receiver then return end
+    if GainName then
+        print("Gain Name: ", GainName)
+    end
 
     local ReceiverModel = Receiver
     if Receiver:IsA("Player") then
@@ -261,7 +268,7 @@ function UnitManagerService:Run()
         RunSystem:Disconnect()
     end
 
-    RunSystem = RunService.Heartbeat:Connect(function(DeltaTime: number)
+    RunSystem = RunService.Heartbeat:Connect(function()
         if os.clock() < LastUpdate + UPDATE_RATE then return end
 
         LastUpdate = os.clock()
