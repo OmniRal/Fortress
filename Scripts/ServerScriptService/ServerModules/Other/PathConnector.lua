@@ -39,6 +39,12 @@ local LETTER_COLORS = {
     Color3.fromRGB(255, 223, 202),
 }
 
+local function Cleanup(This: Instance)
+	for _, Thing in This:GetChildren() do
+		Thing:Destroy()
+	end
+end
+
 local function ConnectTwoPoints(Point_1: BasePart, Point_2: BasePart, Color: Color3)
     local AttachmentA = Instance.new("Attachment")
     AttachmentA.Name = Point_1.Name .. "-" .. Point_2.Name .. "_A"
@@ -53,15 +59,20 @@ local function ConnectTwoPoints(Point_1: BasePart, Point_2: BasePart, Color: Col
     Beam.Name = "Beam_To_" .. Point_2.Name
     Beam.Attachment0 = AttachmentA
     Beam.Attachment1 = AttachmentB
-    Beam.Color = Color
-    Beam.Transparency = 0
+    Beam.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color), ColorSequenceKeypoint.new(1, Color)}
+    Beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(1, 0)}
     Beam.Parent = Point_1
 end
 
 function PathConnector.Run(Folder: Folder, BranchConnections: { {string} })
     if not Folder then return end
 
-    local LastLetterExists = false
+	local LastLetterExists = false
+	
+	for _, Node in Folder:GetChildren() do
+		if not Node then continue end
+		Cleanup(Node)
+	end
     
     for Num, Letter in ipairs(LETTERS) do
         for x = 1, MAX_POINTS - 1 do
@@ -72,10 +83,12 @@ function PathConnector.Run(Folder: Folder, BranchConnections: { {string} })
             end
 
             if Point_1 and Point_2 then
-                LastLetterExists = true
-
+				LastLetterExists = true
+				
                 ConnectTwoPoints(Point_1, Point_2, LETTER_COLORS[Num])
-            end
+			else
+				break
+			end
         end
 
         if LastLetterExists then continue end

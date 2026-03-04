@@ -41,7 +41,6 @@ function CubicBezier(T, P0, P1, P2, P3)
 		+ T^3 * P3
 end
 
---[[
 
 local function CalculateFlightPath(PathModel: Model, Location: string): {Vector3}
 	if not PathModel then return end
