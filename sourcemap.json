@@ -1,5 +1,5 @@
 {
-	"name": "Pegasus-Post",
+	"name": "Fortress",
 	"className": "DataModel",
 	"filePaths": [
 		"default.project.json"
@@ -2223,6 +2223,14 @@
 											]
 										},
 										{
+											"name": "EnemyService",
+											"className": "ModuleScript",
+											"children": [],
+											"filePaths": [
+												"Scripts/ServerScriptService/ServerModules/General/EnemyService.lua"
+											]
+										},
+										{
 											"name": "ProjectileService",
 											"className": "ModuleScript",
 											"children": [],
@@ -2285,6 +2293,14 @@
 											"children": [],
 											"filePaths": [
 												"Scripts/ServerScriptService/ServerModules/Other/LineOfSightService.lua"
+											]
+										},
+										{
+											"name": "PathConnector",
+											"className": "ModuleScript",
+											"children": [],
+											"filePaths": [
+												"Scripts/ServerScriptService/ServerModules/Other/PathConnector.lua"
 											]
 										},
 										{
