@@ -14,9 +14,6 @@ local ProfileService = require(ServerScriptService.Source.ProfileService)
 local ProductInfo = require(ReplicatedStorage.Source.SharedModules.Info.ProductInfo)
 local ShopInfo = require(ReplicatedStorage.Source.SharedModules.Info.ShopInfo)
 local BadgeInfo = require(ReplicatedStorage.Source.SharedModules.Info.BadgeInfo)
-local WeaponInfo = require(ReplicatedStorage.Source.SharedModules.Info.WeaponInfo)
-
-local RelicEnum = require(ReplicatedStorage.Source.SharedModules.Info.CustomEnum.RelicEnum)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -39,7 +36,7 @@ local ProfileTemplate = {
     XP = 0,
 }
 
-local ProfileStore = ProfileService.GetProfileStore('OmniBlot_PegasusPost_Alpha_1', ProfileTemplate)
+local ProfileStore = ProfileService.GetProfileStore('OmniBlot_Fortress_Alpha_1', ProfileTemplate)
 
 local Profiles = {}
 

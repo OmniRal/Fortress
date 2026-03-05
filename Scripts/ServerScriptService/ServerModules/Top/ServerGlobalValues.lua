@@ -4,9 +4,6 @@ local ServerGlobalValues = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local LevelEnum = require(ReplicatedStorage.Source.SharedModules.Info.CustomEnum.LevelEnum)
-
---------------------------------------------------------------------------------------------
 
 ServerGlobalValues["AdminList"] = {
     {Name = "OmniRal", ID = 267421},

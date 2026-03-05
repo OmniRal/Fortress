@@ -46,19 +46,19 @@ local function Cleanup(This: Instance)
 end
 
 local function ConnectTwoPoints(Point_1: BasePart, Point_2: BasePart, Color: Color3)
-    local AttachmentA = Instance.new("Attachment")
-    AttachmentA.Name = Point_1.Name .. "-" .. Point_2.Name .. "_A"
-    AttachmentA.Parent = Point_1
+    local Attachment_0 = Instance.new("Attachment")
+    Attachment_0.Name = Point_1.Name .. "-" .. Point_2.Name .. "_A"
+    Attachment_0.Parent = Point_1
 
-    local AttachmentB = Instance.new("Attachment")
-    AttachmentB.Name = Point_1.Name .. "-" .. Point_2.Name .. "_B"
-    AttachmentB.Parent = Point_2
+    local Attachment_1 = Instance.new("Attachment")
+    Attachment_1.Name = Point_1.Name .. "-" .. Point_2.Name .. "_B"
+    Attachment_1.Parent = Point_2
 
     local Beam = Instance.new("Beam")
     Beam.FaceCamera = true
     Beam.Name = "Beam_To_" .. Point_2.Name
-    Beam.Attachment0 = AttachmentA
-    Beam.Attachment1 = AttachmentB
+    Beam.Attachment0 = Attachment_0
+    Beam.Attachment1 = Attachment_1
     Beam.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, Color), ColorSequenceKeypoint.new(1, Color)}
     Beam.Transparency = NumberSequence.new{NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(1, 0)}
     Beam.Parent = Point_1
