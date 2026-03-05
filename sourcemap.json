@@ -291,6 +291,14 @@
 											]
 										},
 										{
+											"name": "EnemyInfo",
+											"className": "ModuleScript",
+											"children": [],
+											"filePaths": [
+												"Scripts/ReplicatedStorage/SharedModules/Info/EnemyInfo.lua"
+											]
+										},
+										{
 											"name": "ItemInfo",
 											"className": "ModuleScript",
 											"children": [],
@@ -320,14 +328,6 @@
 											"children": [],
 											"filePaths": [
 												"Scripts/ReplicatedStorage/SharedModules/Info/ShopInfo.lua"
-											]
-										},
-										{
-											"name": "EnemyInfo",
-											"className": "ModuleScript",
-											"children": [],
-											"filePaths": [
-												"Scripts/ReplicatedStorage/SharedModules/Info/EnemyInfo.lua"
 											]
 										}
 									],
@@ -2423,6 +2423,63 @@
 					"className": "Folder",
 					"children": [
 						{
+							"name": "Enemies",
+							"className": "Folder",
+							"children": [
+								{
+									"name": "TestEnemy",
+									"className": "Model",
+									"children": [
+										{
+											"name": "Root",
+											"className": "Part",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "Face",
+													"className": "Motor6D",
+													"filePaths": [],
+													"children": [
+														{
+															"name": "DefaultC1",
+															"className": "CFrameValue",
+															"filePaths": [],
+															"children": []
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "Face",
+											"className": "Part",
+											"filePaths": [],
+											"children": []
+										},
+										{
+											"name": "AnimationController",
+											"className": "AnimationController",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "Animator",
+													"className": "Animator",
+													"filePaths": [],
+													"children": []
+												}
+											]
+										}
+									],
+									"filePaths": [
+										"Assets/Server/Enemies/TestEnemy.rbxm"
+									]
+								}
+							],
+							"filePaths": [
+								"Assets/Server/Enemies"
+							]
+						},
+						{
 							"name": "Misc",
 							"className": "Folder",
 							"children": [
@@ -2494,63 +2551,6 @@
 							],
 							"filePaths": [
 								"Assets/Server/Misc"
-							]
-						},
-						{
-							"name": "Enemies",
-							"className": "Folder",
-							"children": [
-								{
-									"name": "TestEnemy",
-									"className": "Model",
-									"children": [
-										{
-											"name": "Root",
-											"className": "Part",
-											"filePaths": [],
-											"children": [
-												{
-													"name": "Face",
-													"className": "Motor6D",
-													"filePaths": [],
-													"children": [
-														{
-															"name": "DefaultC1",
-															"className": "CFrameValue",
-															"filePaths": [],
-															"children": []
-														}
-													]
-												}
-											]
-										},
-										{
-											"name": "Face",
-											"className": "Part",
-											"filePaths": [],
-											"children": []
-										},
-										{
-											"name": "AnimationController",
-											"className": "AnimationController",
-											"filePaths": [],
-											"children": [
-												{
-													"name": "Animator",
-													"className": "Animator",
-													"filePaths": [],
-													"children": []
-												}
-											]
-										}
-									],
-									"filePaths": [
-										"Assets/Server/Enemies/TestEnemy.rbxm"
-									]
-								}
-							],
-							"filePaths": [
-								"Assets/Server/Enemies"
 							]
 						}
 					],

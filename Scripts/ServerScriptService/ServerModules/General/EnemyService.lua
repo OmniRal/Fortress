@@ -190,35 +190,42 @@ function EnemyService.Run()
 	EnemyService.Stop() -- Make sure another heartbeat isn't running
 
 	RunHeartbeat = RunService.Heartbeat:Connect(function(DeltaTime: number)
+		-- Move all the enemies
 		for Enemy, Info in Enemies do
 			if not Enemy or not Info then continue end
 			if not Info.CanMove then continue end
 			if not Info.PathPoints or not Info.TotalPathTime then continue end
 
 			Info.PathTimePassed += (DeltaTime * Info.MoveSpeed)
+
+			if Info.PathTimePassed >= Info.TotalPathTime then
+				-- Enemy has reached the fortress
+				Enemies[Enemy] = nil
+				Enemy:Destroy()
+				-- TODO: Damage the fortress
+				continue
+			end
 			
 			local TargetDistance = math.min(Info.PathTimePassed, Info.TotalPathTime)
 			local CurrentDistance = 0
-			local CurrentPoint = 1
+			local SegmentDistance = 0
+			local CurrentPoint, NextPoint = nil, nil
 
+			-- Figure out which point the enemy is currently on
 			for x = 1, #Info.PathPoints - 1 do
-				local SegmentDistance = (Info.PathPoints[x] - Info.PathPoints[x + 1]).Magnitude
-				if CurrentDistance + SegmentDistance >= TargetDistance then
-					CurrentPoint = x
-					break
-				end
+				CurrentPoint = Info.PathPoints[x]
+				NextPoint = Info.PathPoints[x + 1]
+
+				SegmentDistance = (CurrentPoint - NextPoint).Magnitude
+				if CurrentDistance + SegmentDistance >= TargetDistance then break end
+
 				CurrentDistance += SegmentDistance
 			end
 
-			local A = Info.PathPoints[CurrentPoint]
-			local B = Info.PathPoints[CurrentPoint + 1] or Info.PathPoints[CurrentPoint]
-			local SegmentDistance = (A - B).Magnitude
-			local SegmentProgress = math.clamp((TargetDistance - CurrentDistance) / SegmentDistance, 0, 1)
+			-- Position the enemy
+			local CurrentPosition = CurrentPoint:Lerp(NextPoint, math.clamp((TargetDistance - CurrentDistance) / SegmentDistance, 0, 1))
+			local Direction = (NextPoint - CurrentPosition).Unit
 
-			local CurrentPosition = A:Lerp(B, SegmentProgress)
-
-			local NextPoint = math.min(CurrentPoint + 1, #Info.PathPoints)
-			local Direction = (Info.PathPoints[NextPoint] - CurrentPosition).Unit
 			local TargetCFrame = Info.LastCFrame:Lerp(CFrame.new(CurrentPosition, CurrentPosition + Direction), 0.05)
 
 			Enemy:PivotTo(TargetCFrame)
@@ -277,6 +284,7 @@ function EnemyService.SpawnNew(EnemyName: string, StartNode: string)
 	local Track: AnimationTrack = NewModel.AnimationController.Animator:LoadAnimation(MoveAnim)
 	Track:Play(nil, nil, RNG:NextNumber(MyEnemyInfo.AnimSpeed / 2, MyEnemyInfo.AnimSpeed) )
 
+	-- Add keyframe connections
 	Track.KeyframeReached:Connect(function(Keyframe: string)
 		if not Enemies[NewModel] then return end
 		if Keyframe == "StartMoving" then
@@ -298,12 +306,13 @@ function EnemyService:Deferred()
 
 	EnemyService.Run()
 	
-	local Options = {"A1", "C1"}
-	while true do
-		EnemyService.SpawnNew("TestEnemy", Options[RNG:NextInteger(1, #Options)])
-		task.wait(5)
-	end
-
+	task.spawn(function()
+		local Options = {"A1", "C1"}
+		while true do
+			EnemyService.SpawnNew("TestEnemy", Options[RNG:NextInteger(1, #Options)])
+			task.wait(5)
+		end
+	end)
 end
 
 return EnemyService
