@@ -63,4 +63,24 @@ export type Ability = {
     Details: {}?
 }
 
+export type EasingStyle = "Sine" | "Quad" | "Quint" | "Cubic" | "Back" | "Bounce" | "Elastic"
+export type EasingDirection = "In" | "Out" | "InOut"
+
+export type PartBuildData = {
+    Name: string,
+    PivotOffset: CFrame?,
+    Attached: {To: string, CF: CFrame}?,
+    Start: {Frame: number, CF: CFrame, Angles: Vector3, Size: Vector3},
+    End: {Frame: number, CF: CFrame, Angles: Vector3, Size: Vector3, Transparency: number?},
+    Easing: {Style: EasingStyle, Direction: EasingDirection, Details: {[string]: number}?}?
+}
+
+export type BuildTimeline = {
+    MaxKeyframes: number,
+    Scaler: number?,
+    Parts: {
+        PartBuildData
+    }
+}
+
 return CustomEnum

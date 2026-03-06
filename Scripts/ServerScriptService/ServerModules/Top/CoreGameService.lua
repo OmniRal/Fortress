@@ -26,7 +26,7 @@ local CustomEnum = require(ReplicatedStorage.Source.SharedModules.Info.CustomEnu
 
 local SignalService = require(ServerScriptService.Source.ServerModules.General.SignalService)
 local CharacterService = require(ServerScriptService.Source.ServerModules.Player.CharacterService)
-local Utility = require(ReplicatedStorage.Source.SharedModules.Other.Utility)
+local Utility = require(ReplicatedStorage.Source.SharedModules.General.Utility)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Constants

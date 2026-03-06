@@ -16,7 +16,7 @@ local New = require(ReplicatedStorage.Source.Pronghorn.New)
 
 local PlayerInfo = require(StarterPlayer.StarterPlayerScripts.Source.Other.PlayerInfo)
 local UIBasics = require(ReplicatedStorage.Source.SharedModules.UI.UIBasics)
-local ColorPalette = require(ReplicatedStorage.Source.SharedModules.Other.ColorPalette)
+local ColorPalette = require(ReplicatedStorage.Source.SharedModules.Info.ColorPalette)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

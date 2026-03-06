@@ -18,7 +18,7 @@ local Workspace = game:GetService("Workspace")
 
 local EnemyInfo = require(ReplicatedStorage.Source.SharedModules.Info.EnemyInfo)
 
-local Utility = require(ReplicatedStorage.Source.SharedModules.Other.Utility)
+local Utility = require(ReplicatedStorage.Source.SharedModules.General.Utility)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Constants
