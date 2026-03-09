@@ -8,12 +8,23 @@ local CustomEnum = require(ReplicatedStorage.Source.SharedModules.Info.CustomEnu
 local TowerInfo: {[string]: {
     DisplayName: string,
 
+    Stats: {
+        {Damage: number, Range: number, Cooldown: number}
+    },
+
     BuildTimeline: CustomEnum.BuildTimeline,
 }} = {}
 
 
 TowerInfo["TestTower"] = {
     DisplayName = "Test Tower",
+
+    Stats = {
+        {Damage = 10, Range = 40, Cooldown = 1},
+        {Damage = 15, Range = 50, Cooldown = 0.75},
+        {Damage = 20, Range = 60, Cooldown = 0.5}
+    },
+
     BuildTimeline = {
         MaxKeyframes = 40,
         Scaler = 1,
