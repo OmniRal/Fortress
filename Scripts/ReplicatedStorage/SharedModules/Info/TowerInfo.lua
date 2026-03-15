@@ -15,8 +15,50 @@ local TowerInfo: {[string]: {
     BuildTimeline: CustomEnum.BuildTimeline,
 }} = {}
 
-
 TowerInfo["TestTower"] = {
+    DisplayName = "Test Tower",
+    
+    Stats = {
+        {Damage = 10, Range = 40, Cooldown = 1},
+        {Damage = 15, Range = 50, Cooldown = 0.75},
+        {Damage = 20, Range = 60, Cooldown = 0.5}
+    },
+
+    BuildTimeline = {
+        MaxKeyframes = 46,
+        Scaler = 1,
+
+        Parts = {
+            [1] = {
+                Name = "Base",
+                Start = {Frame = 1, CF = CFrame.new(0, -1, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(12, 0.0001, 12)},
+                End = {Frame = 10, CF = CFrame.new(0, 0, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(12, 2, 12)}
+            },
+            [2] = {
+                Name = "Tower",
+                Start = {Frame = 11, CF = CFrame.new(0, -6, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(10, 0.0001, 10)},
+                End = {Frame = 20, CF = CFrame.new(0, 0, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(10, 12, 10)}
+            },
+            [3] = {
+                Name = "Top",
+                Start = {Frame = 21, CF = CFrame.new(0, -1, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(12, 0.0001, 12)},
+                End = {Frame = 30, CF = CFrame.new(0, 0, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(12, 2, 12)}
+            },
+            [4] = {
+                Name = "Shooter",
+                Start = {Frame = 31, CF = CFrame.new(0, -1, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(6, 0.0001, 10)},
+                End = {Frame = 40, CF = CFrame.new(0, 0, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(6, 2, 10)}
+            },
+            [5] = {
+                Name = "Seat",
+                Start = {Frame = 41, CF = CFrame.new(0, -0.05, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(2, 0.0001, 2)},
+                End = {Frame = 45, CF = CFrame.new(0, 0, 0), Angles = Vector3.new(0, 0, 0), Size = Vector3.new(2, 0.1, 2)}
+            },
+        }
+    }
+}
+
+TowerInfo["TestTower_Old"] = {
     DisplayName = "Test Tower",
 
     Stats = {
