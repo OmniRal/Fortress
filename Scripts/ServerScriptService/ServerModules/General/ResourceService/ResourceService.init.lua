@@ -52,7 +52,7 @@ function ResourceService:Init()
     for _, Folder in script:GetChildren() do
         if not Folder:IsA("Folder") or not string.find(Folder.Name, "Modules") then continue end
         for _, Module in Folder:GetChildren() do
-            local TypeName = string.gsub(Folder.Name, "Module", "")
+            local TypeName = string.gsub(Folder.Name, "Modules", "")
             if not ResourceModules[TypeName] then continue end
             ResourceModules[TypeName][Module.Name] = require(Module)
         end
