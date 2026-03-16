@@ -25,7 +25,7 @@ TowerInfo["TestTower"] = {
     },
 
     BuildTimeline = {
-        MaxKeyframes = 46,
+        MaxKeyframes = 45,
         Scaler = 1,
 
         Parts = {

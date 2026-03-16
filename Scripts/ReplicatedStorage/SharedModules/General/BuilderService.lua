@@ -204,10 +204,10 @@ local function TestTowerSet()
             if not Root then continue end
 
             if InsideButton(Root, Lower) then
-                Workspace.TestTower.Keyframe.Value = math.clamp(Workspace.TestTower.Keyframe.Value - 0.1, 1, 40)
+                Workspace.TestTower.Keyframe.Value = math.clamp(Workspace.TestTower.Keyframe.Value - 0.1, 1, 45)
             end
             if InsideButton(Root, Raise) then
-                Workspace.TestTower.Keyframe.Value = math.clamp(Workspace.TestTower.Keyframe.Value + 0.1, 1, 40)
+                Workspace.TestTower.Keyframe.Value = math.clamp(Workspace.TestTower.Keyframe.Value + 0.1, 1, 45)
             end
         end
     end)
