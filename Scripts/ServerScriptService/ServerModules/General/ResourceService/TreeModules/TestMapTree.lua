@@ -1,25 +1,24 @@
-local RunService = game:GetService("RunService")
 -- OmniRal
 
-local ResourceService = {}
+local TestMapTree = {}
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Services
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Modules
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-local ResourceModules = {
-    Tree = {},
-    Rock = {},
-    Crystal = {},
-}
+local MapInfo = require(ReplicatedStorage.Source.SharedModules.Info.MapInfo)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Constants
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+local MAP_NAME = "TestMap"
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Remotes
@@ -29,64 +28,48 @@ local ResourceModules = {
 -- Variables
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-local RunConnection: thread? = nil
-
-local Resources: {
-    [Model]: {Chopped: boolean, RespawnAt: number}
-} = {}
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Private Functions
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+local function DestroyAnimation(Model: Model)
+
+end
+
+local function RespawnAnimation(Model: Model)
+
+end
+
+local function ShakeAnimation(Model: Model)
+
+end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Public API
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
--- Spawn the resources for one specific map
-function ResourceService.SpawnResources(MapName: string, Folder: Folder)
-    for _, Spawner in Folder:GetChildren() do
-        local TypeName = string.gsub(Spawner.Name, "Spawner", "")
-        if TypeName ~= "Tree" and TypeName ~= "Rock" and TypeName ~= "Crystal" then continue end
+function TestMapTree.Set(Model: Model)
+    if not Model then return end
 
-        local ThisModule = ResourceModules[TypeName][MapName]
-        if not ThisModule then continue end
+    local MaxHealth = 0
 
-        ThisModule.Set(Spawner)
-    end
-end
+    Model:SetAttribute("Chopped", false)
+    Model:SetAttribute("Ready", false)
+    Model:SetAttribute("Health", 0)
 
-function ResourceService.Stop()
-    if not RunConnection then return end
-    task.cancel(RunConnection)
-    RunConnection = nil
-end
-
--- Handles respawning of resources
-function ResourceService.Run()
-    ResourceService.Stop()
-
-    RunConnection = task.spawn(function()
-        while true do
-            task.wait(1)
-            
-            for Model, Info in Resources do
-                if not Model or not Info then continue end
-            end
+    Model:GetAttributeChangedSignal("Chopped"):Connect(function()
+        if Model:GetAttribute("Chopped") then
+            -- Destroy (chop down) animation
+            DestroyAnimation(Model)
+        else
+            -- Respawn animation
+            RespawnAnimation(Model)
         end
+    end)
+
+    Model:GetAttributeChangedSignal("Health"):Connect(function()
+        
     end)
 end
 
-function ResourceService:Init()
-    -- Get all the individual resource modules
-    for _, Folder in script:GetChildren() do
-        if not Folder:IsA("Folder") or not string.find(Folder.Name, "Modules") then continue end
-        for _, Module in Folder:GetChildren() do
-            local TypeName = string.gsub(Folder.Name, "Modules", "")
-            if not ResourceModules[TypeName] then continue end
-            ResourceModules[TypeName][Module.Name] = require(Module)
-        end
-    end
-end
-
-return ResourceService
+return TestMapTree
