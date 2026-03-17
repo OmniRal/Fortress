@@ -28,6 +28,8 @@ local MAP_NAME = "TestMap"
 -- Variables
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+local RNG = Random.new()
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Private Functions
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -50,25 +52,34 @@ end
 
 function TestMapTree.Set(Model: Model)
     if not Model then return end
+    if not MapInfo[MAP_NAME] then return end
 
-    local MaxHealth = 0
+    local Range = MapInfo[MAP_NAME].TreeHealth
+    if not Range then return end
 
-    Model:SetAttribute("Chopped", false)
+    local MaxHealth = RNG:NextNumber(Range.Min, Range.Max)
+    local LastHealth = 0
+
     Model:SetAttribute("Ready", false)
-    Model:SetAttribute("Health", 0)
-
-    Model:GetAttributeChangedSignal("Chopped"):Connect(function()
-        if Model:GetAttribute("Chopped") then
-            -- Destroy (chop down) animation
-            DestroyAnimation(Model)
-        else
-            -- Respawn animation
-            RespawnAnimation(Model)
-        end
-    end)
+    Model:SetAttribute("Health", MaxHealth)
 
     Model:GetAttributeChangedSignal("Health"):Connect(function()
+        local Health = Model:GetAttribute("Health")
+
+        if Health <= 0 then
+            DestroyAnimation(Model)
         
+        elseif Health >= MaxHealth then
+            if Model:GetAttribute("Ready") then return end
+            RespawnAnimation(Model)
+
+        else
+            if Health < LastHealth then
+                ShakeAnimation(Model)
+            end
+        end
+
+        LastHealth = Health
     end)
 end
 

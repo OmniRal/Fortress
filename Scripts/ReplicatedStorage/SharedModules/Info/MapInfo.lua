@@ -19,7 +19,7 @@ MapInfo["TestMap"] = {
 
     TreeHealth = NumberRange.new(70, 80),
     RockHealth = NumberRange.new(90, 100),
-    Crystalhealth = NumberRange.new(120, 130)
+    CrystalHealth = NumberRange.new(120, 130)
 }
 
 return MapInfo

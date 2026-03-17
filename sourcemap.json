@@ -356,6 +356,14 @@
 											]
 										},
 										{
+											"name": "MapInfo",
+											"className": "ModuleScript",
+											"children": [],
+											"filePaths": [
+												"Scripts/ReplicatedStorage/SharedModules/Info/MapInfo.lua"
+											]
+										},
+										{
 											"name": "ObjectInfo",
 											"className": "ModuleScript",
 											"children": [],
@@ -2247,6 +2255,48 @@
 											]
 										},
 										{
+											"name": "ResourceService",
+											"className": "ModuleScript",
+											"children": [
+												{
+													"name": "CrystalModules",
+													"className": "Folder",
+													"children": [],
+													"filePaths": [
+														"Scripts/ServerScriptService/ServerModules/General/ResourceService/CrystalModules"
+													]
+												},
+												{
+													"name": "RockModules",
+													"className": "Folder",
+													"children": [],
+													"filePaths": [
+														"Scripts/ServerScriptService/ServerModules/General/ResourceService/RockModules"
+													]
+												},
+												{
+													"name": "TreeModules",
+													"className": "Folder",
+													"children": [
+														{
+															"name": "TestMapTree",
+															"className": "ModuleScript",
+															"children": [],
+															"filePaths": [
+																"Scripts/ServerScriptService/ServerModules/General/ResourceService/TreeModules/TestMapTree.lua"
+															]
+														}
+													],
+													"filePaths": [
+														"Scripts/ServerScriptService/ServerModules/General/ResourceService/TreeModules"
+													]
+												}
+											],
+											"filePaths": [
+												"Scripts/ServerScriptService/ServerModules/General/ResourceService/ResourceService.init.lua"
+											]
+										},
+										{
 											"name": "SignalService",
 											"className": "ModuleScript",
 											"children": [],
@@ -2276,39 +2326,6 @@
 											"children": [],
 											"filePaths": [
 												"Scripts/ServerScriptService/ServerModules/General/UnitValuesService.lua"
-											]
-										},
-										{
-											"name": "ResourceService",
-											"className": "ModuleScript",
-											"children": [
-												{
-													"name": "TreeModules",
-													"className": "Folder",
-													"children": [],
-													"filePaths": [
-														"Scripts/ServerScriptService/ServerModules/General/ResourceService/TreeModules"
-													]
-												},
-												{
-													"name": "RockModules",
-													"className": "Folder",
-													"children": [],
-													"filePaths": [
-														"Scripts/ServerScriptService/ServerModules/General/ResourceService/RockModules"
-													]
-												},
-												{
-													"name": "CrystalModules",
-													"className": "Folder",
-													"children": [],
-													"filePaths": [
-														"Scripts/ServerScriptService/ServerModules/General/ResourceService/CrystalModules"
-													]
-												}
-											],
-											"filePaths": [
-												"Scripts/ServerScriptService/ServerModules/General/ResourceService/ResourceService.init.lua"
 											]
 										}
 									],
@@ -2537,6 +2554,62 @@
 							]
 						},
 						{
+							"name": "Map",
+							"className": "Folder",
+							"children": [
+								{
+									"name": "TestMap",
+									"className": "Folder",
+									"children": [
+										{
+											"name": "Trees",
+											"className": "Folder",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "TestTree",
+													"className": "Model",
+													"filePaths": [],
+													"children": [
+														{
+															"name": "Base",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Leaves_1",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Leaves_2",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Leaves_3",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														}
+													]
+												}
+											]
+										}
+									],
+									"filePaths": [
+										"Assets/Server/Map/TestMap.rbxm"
+									]
+								}
+							],
+							"filePaths": [
+								"Assets/Server/Map"
+							]
+						},
+						{
 							"name": "Misc",
 							"className": "Folder",
 							"children": [
@@ -2656,62 +2729,6 @@
 							],
 							"filePaths": [
 								"Assets/Server/Towers"
-							]
-						},
-						{
-							"name": "Map",
-							"className": "Folder",
-							"children": [
-								{
-									"name": "TestMap",
-									"className": "Folder",
-									"children": [
-										{
-											"name": "Trees",
-											"className": "Folder",
-											"filePaths": [],
-											"children": [
-												{
-													"name": "TestTree",
-													"className": "Model",
-													"filePaths": [],
-													"children": [
-														{
-															"name": "Base",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														},
-														{
-															"name": "Leaves_1",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														},
-														{
-															"name": "Leaves_2",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														},
-														{
-															"name": "Leaves_3",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														}
-													]
-												}
-											]
-										}
-									],
-									"filePaths": [
-										"Assets/Server/Map/TestMap.rbxm"
-									]
-								}
-							],
-							"filePaths": [
-								"Assets/Server/Map"
 							]
 						}
 					],
