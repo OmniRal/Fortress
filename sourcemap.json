@@ -2554,62 +2554,6 @@
 							]
 						},
 						{
-							"name": "Map",
-							"className": "Folder",
-							"children": [
-								{
-									"name": "TestMap",
-									"className": "Folder",
-									"children": [
-										{
-											"name": "Trees",
-											"className": "Folder",
-											"filePaths": [],
-											"children": [
-												{
-													"name": "TestTree",
-													"className": "Model",
-													"filePaths": [],
-													"children": [
-														{
-															"name": "Base",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														},
-														{
-															"name": "Leaves_1",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														},
-														{
-															"name": "Leaves_2",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														},
-														{
-															"name": "Leaves_3",
-															"className": "Part",
-															"filePaths": [],
-															"children": []
-														}
-													]
-												}
-											]
-										}
-									],
-									"filePaths": [
-										"Assets/Server/Map/TestMap.rbxm"
-									]
-								}
-							],
-							"filePaths": [
-								"Assets/Server/Map"
-							]
-						},
-						{
 							"name": "Misc",
 							"className": "Folder",
 							"children": [
@@ -2729,6 +2673,62 @@
 							],
 							"filePaths": [
 								"Assets/Server/Towers"
+							]
+						},
+						{
+							"name": "Maps",
+							"className": "Folder",
+							"children": [
+								{
+									"name": "TestMap",
+									"className": "Folder",
+									"children": [
+										{
+											"name": "Trees",
+											"className": "Folder",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "TestTree",
+													"className": "Model",
+													"filePaths": [],
+													"children": [
+														{
+															"name": "Base",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Leaves_1",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Leaves_2",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Leaves_3",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														}
+													]
+												}
+											]
+										}
+									],
+									"filePaths": [
+										"Assets/Server/Maps/TestMap.rbxm"
+									]
+								}
+							],
+							"filePaths": [
+								"Assets/Server/Maps"
 							]
 						}
 					],

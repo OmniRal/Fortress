@@ -104,12 +104,10 @@ end
 
 -- When the resource loses some health (but not dead)
 local function ShakeAnimation(Model: Model, Tweens: {Tween})
-    if Model:GetAttribute("AnimationRunning") then return end
-
     StopOldTweens(Tweens)
 
     for x = 1, 3 do
-        local Leaves = Model:FindFirstChild("Leaves" .. x) :: BasePart
+        local Leaves = Model:FindFirstChild("Leaves_" .. x) :: BasePart
         if not Leaves then continue end
 
         local OriginalCF = Leaves.CFrame
@@ -137,18 +135,18 @@ function TestMapTree.Set(Model: Model)
     local Range = MapInfo[MAP_NAME].TreeHealth
     if not Range then return end
 
-    local MaxHealth = RNG:NextNumber(Range.Min, Range.Max)
-    local LastHealth = 0
+    local MaxHealth = math.ceil(RNG:NextNumber(Range.Min, Range.Max))
+    local LastHealth = MaxHealth
     
     local Tweens: {Tween} = {}
 
-    Model:SetAttribute("Ready", false)
+    Model:SetAttribute("Ready", true)
     Model:SetAttribute("Health", MaxHealth)
     Model:SetAttribute("AnimationRunning", false)
 
     Model:GetAttributeChangedSignal("Health"):Connect(function()
         local Health = Model:GetAttribute("Health")
-
+        
         if Health <= 0 then
             DestroyAnimation(Model, Tweens)
         
@@ -159,6 +157,7 @@ function TestMapTree.Set(Model: Model)
 
         else
             if Health < LastHealth then
+                if not Model:GetAttribute("Ready") then return end
                 if Model:GetAttribute("AnimationRunning") then return end
                 
                 ShakeAnimation(Model, Tweens)
