@@ -56,7 +56,7 @@ local function DestroyAnimation(Model: Model, Tweens: {Tween})
     Model:SetAttribute("AnimationRunning", true)
 
     for x = 1, 3 do
-        local Leaves = Model:FindFirstChild("Leaves" .. x) :: BasePart
+        local Leaves = Model:FindFirstChild("Leaves_" .. x) :: BasePart
         if not Leaves then continue end
 
         local Copy = Leaves:Clone()
@@ -128,21 +128,13 @@ end
 -- Public API
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function TestMapTree.Set(Model: Model)
+function TestMapTree.Set(Model: Model, MaxHealth: number)
     if not Model then return end
     if not MapInfo[MAP_NAME] then return end
 
-    local Range = MapInfo[MAP_NAME].TreeHealth
-    if not Range then return end
-
-    local MaxHealth = math.ceil(RNG:NextNumber(Range.Min, Range.Max))
-    local LastHealth = MaxHealth
+    local LastHealth = Model:GetAttribute("Health")
     
     local Tweens: {Tween} = {}
-
-    Model:SetAttribute("Ready", true)
-    Model:SetAttribute("Health", MaxHealth)
-    Model:SetAttribute("AnimationRunning", false)
 
     Model:GetAttributeChangedSignal("Health"):Connect(function()
         local Health = Model:GetAttribute("Health")

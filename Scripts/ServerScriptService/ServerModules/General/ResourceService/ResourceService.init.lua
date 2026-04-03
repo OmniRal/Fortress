@@ -6,9 +6,11 @@ local ResourceService = {}
 -- Services
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local ServerStorage = game:GetService("ServerStorage")
 local Workspace = game:GetService("Workspace")
+local MapInfo = require(ReplicatedStorage.Source.SharedModules.Info.MapInfo)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Modules
@@ -75,11 +77,20 @@ function ResourceService.SpawnResources(MapName: string, Folder: Folder)
         local ThisModel = AllModels[RNG:NextInteger(1, #AllModels)]
         if not ThisModule or not ThisModel then continue end
 
+        local Range = MapInfo[MapName][TypeName .. "Health"]
+        if not Range then continue end
+
+        local MaxHealth = math.ceil(RNG:NextInteger(Range.Min, Range.Max))
+
         local NewModel = ThisModel:Clone() :: Model
         NewModel:PivotTo(Spawn.CFrame * CFrame.new(0, -0.5, 0))
         NewModel.Parent = Workspace
 
-        ThisModule.Set(NewModel)
+        NewModel:SetAttribute("Ready", false)
+        NewModel:SetAttribute("Health", MaxHealth)
+        NewModel:SetAttribute("AnimationRunning", false)
+
+        ThisModule.Set(NewModel, MaxHealth)
         Spawn:Destroy()
     end
 end
@@ -122,6 +133,7 @@ end
 
 function ResourceService.Deferred()
     CheckForTestMap()
+    ResourceService.Run()
 end
 
 return ResourceService
