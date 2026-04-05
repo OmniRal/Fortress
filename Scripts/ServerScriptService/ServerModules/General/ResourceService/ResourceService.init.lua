@@ -39,7 +39,7 @@ local SPAWN_TEST_RESOURCES = true
 local RunConnection: thread? = nil
 
 local Resources: {
-    [Model]: {Chopped: boolean, RespawnAt: number}
+    [Model]: {MaxHealth: number, Chopped: boolean, RespawnAt: number}
 } = {}
 
 local Assets = ServerStorage.Assets
@@ -77,10 +77,10 @@ function ResourceService.SpawnResources(MapName: string, Folder: Folder)
         local ThisModel = AllModels[RNG:NextInteger(1, #AllModels)]
         if not ThisModule or not ThisModel then continue end
 
-        local Range = MapInfo[MapName][TypeName .. "Health"]
-        if not Range then continue end
+        local HealthRange, RespawnRange = MapInfo[MapName][TypeName .. "Health"], MapInfo[MapName][TypeName .. "Respawn"]
+        if not HealthRange or not RespawnRange then continue end
 
-        local MaxHealth = math.ceil(RNG:NextInteger(Range.Min, Range.Max))
+        local MaxHealth = math.ceil(RNG:NextInteger(HealthRange.Min, HealthRange.Max))
 
         local NewModel = ThisModel:Clone() :: Model
         NewModel:PivotTo(Spawn.CFrame * CFrame.new(0, -0.5, 0))
@@ -90,8 +90,20 @@ function ResourceService.SpawnResources(MapName: string, Folder: Folder)
         NewModel:SetAttribute("Health", MaxHealth)
         NewModel:SetAttribute("AnimationRunning", false)
 
+        NewModel:GetAttributeChangedSignal("Health"):Connect(function()
+            if NewModel:GetAttribute("Health") > 0 then return end
+            if not Resources[NewModel] then return end
+
+            Resources[NewModel].RespawnAt = os.clock() + RNG:NextNumber(RespawnRange.Min, RespawnRange.Max)
+            Resources[NewModel].Chopped = true
+        end)
+
         ThisModule.Set(NewModel, MaxHealth)
         Spawn:Destroy()
+
+        Resources[NewModel] = {MaxHealth = MaxHealth, Chopped = false, RespawnAt = 0}
+
+        NewModel:SetAttribute("Ready", true)
     end
 end
 
@@ -109,8 +121,14 @@ function ResourceService.Run()
         while true do
             task.wait(1)
             
-            for Model, Info in Resources do
-                if not Model or not Info then continue end
+            for Model, Data in Resources do
+                if not Model or not Data then continue end
+                if not Data.Chopped then continue end
+
+                if os.clock() < Data.RespawnAt then continue end
+
+                Data.Chopped = false
+                Model:SetAttribute("Health", Data.MaxHealth)
             end
         end
     end)

@@ -53,6 +53,7 @@ end
 local function DestroyAnimation(Model: Model, Tweens: {Tween})
     StopOldTweens(Tweens)
 
+    Model:SetAttribute("Ready", false)
     Model:SetAttribute("AnimationRunning", true)
 
     for x = 1, 3 do
@@ -84,11 +85,12 @@ local function RespawnAnimation(Model: Model, Tweens: {Tween})
     Model:SetAttribute("AnimationRunning", true)
 
     for x = 1, 3 do
-        local Leaves = Model:FindFirstChild("Leaves" .. x) :: BasePart
+        local Leaves = Model:FindFirstChild("Leaves_" .. x) :: BasePart
         if not Leaves then continue end
 
         local OriginalSize = Leaves.Size
         Leaves.Size = Vector3.new(0.1, 0.1, 0.1)
+        Leaves.Transparency = 0
         
         local GrowTween = TweenService:Create(Leaves, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Size = OriginalSize})
         GrowTween.Completed:Connect(function()
@@ -100,6 +102,8 @@ local function RespawnAnimation(Model: Model, Tweens: {Tween})
 
         table.insert(Tweens, GrowTween)
     end
+
+    Model:SetAttribute("Ready", true)
 end
 
 -- When the resource loses some health (but not dead)
