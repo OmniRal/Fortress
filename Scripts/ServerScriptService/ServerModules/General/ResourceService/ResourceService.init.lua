@@ -69,14 +69,18 @@ function ResourceService.SpawnResources(MapName: string, Folder: Folder)
     for _, Spawn in Folder:GetChildren() do
         local TypeName = string.gsub(Spawn.Name, "Spawn", "")
         if TypeName ~= "Tree" and TypeName ~= "Rock" and TypeName ~= "Crystal" then continue end
+        warn(TypeName)
         if not Assets.Maps[MapName]:FindFirstChild(TypeName .. "s") then continue end
 
+        warn(1)
         local AllModels = Assets.Maps[MapName][TypeName .. "s"]:GetChildren()
 
+        warn(2)
         local ThisModule = ResourceModules[TypeName][MapName .. TypeName]
         local ThisModel = AllModels[RNG:NextInteger(1, #AllModels)]
         if not ThisModule or not ThisModel then continue end
 
+        warn(3)
         local HealthRange, RespawnRange = MapInfo[MapName][TypeName .. "Health"], MapInfo[MapName][TypeName .. "Respawn"]
         if not HealthRange or not RespawnRange then continue end
 
@@ -147,6 +151,8 @@ function ResourceService:Init()
             ResourceModules[TypeName][Module.Name] = require(Module)
         end
     end
+
+    warn(ResourceModules)
 end
 
 function ResourceService.Deferred()

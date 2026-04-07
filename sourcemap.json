@@ -2261,7 +2261,16 @@
 												{
 													"name": "CrystalModules",
 													"className": "Folder",
-													"children": [],
+													"children": [
+														{
+															"name": "TestMapCrystal",
+															"className": "ModuleScript",
+															"children": [],
+															"filePaths": [
+																"Scripts/ServerScriptService/ServerModules/General/ResourceService/CrystalModules/TestMapCrystal.lua"
+															]
+														}
+													],
 													"filePaths": [
 														"Scripts/ServerScriptService/ServerModules/General/ResourceService/CrystalModules"
 													]
@@ -2269,7 +2278,16 @@
 												{
 													"name": "RockModules",
 													"className": "Folder",
-													"children": [],
+													"children": [
+														{
+															"name": "TestMapRock",
+															"className": "ModuleScript",
+															"children": [],
+															"filePaths": [
+																"Scripts/ServerScriptService/ServerModules/General/ResourceService/RockModules/TestMapRock.lua"
+															]
+														}
+													],
 													"filePaths": [
 														"Scripts/ServerScriptService/ServerModules/General/ResourceService/RockModules"
 													]
@@ -2591,6 +2609,110 @@
 														},
 														{
 															"name": "Leaves_3",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "TestCrystal",
+											"className": "Folder",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "TestCrystal",
+													"className": "Model",
+													"filePaths": [],
+													"children": [
+														{
+															"name": "Base",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Top",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "TestRock",
+											"className": "Folder",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "TestRock",
+													"className": "Model",
+													"filePaths": [],
+													"children": [
+														{
+															"name": "Base",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Top",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "Crystals",
+											"className": "Folder",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "TestCrystal",
+													"className": "Model",
+													"filePaths": [],
+													"children": [
+														{
+															"name": "Base",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Top",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "Rocks",
+											"className": "Folder",
+											"filePaths": [],
+											"children": [
+												{
+													"name": "TestRock",
+													"className": "Model",
+													"filePaths": [],
+													"children": [
+														{
+															"name": "Base",
+															"className": "Part",
+															"filePaths": [],
+															"children": []
+														},
+														{
+															"name": "Top",
 															"className": "Part",
 															"filePaths": [],
 															"children": []
