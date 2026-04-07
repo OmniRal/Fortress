@@ -16,6 +16,7 @@ local MapInfo = require(ReplicatedStorage.Source.SharedModules.Info.MapInfo)
 -- Modules
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+local New = require(ReplicatedStorage.Source.Pronghorn.New)
 local ResourceModules = {
     Tree = {},
     Rock = {},
@@ -42,6 +43,7 @@ local Resources: {
     [Model]: {MaxHealth: number, Chopped: boolean, RespawnAt: number}
 } = {}
 
+local PickupFolder: Folder
 local Assets = ServerStorage.Assets
 local RNG = Random.new()
 
@@ -69,18 +71,15 @@ function ResourceService.SpawnResources(MapName: string, Folder: Folder)
     for _, Spawn in Folder:GetChildren() do
         local TypeName = string.gsub(Spawn.Name, "Spawn", "")
         if TypeName ~= "Tree" and TypeName ~= "Rock" and TypeName ~= "Crystal" then continue end
-        warn(TypeName)
         if not Assets.Maps[MapName]:FindFirstChild(TypeName .. "s") then continue end
 
-        warn(1)
         local AllModels = Assets.Maps[MapName][TypeName .. "s"]:GetChildren()
 
-        warn(2)
         local ThisModule = ResourceModules[TypeName][MapName .. TypeName]
         local ThisModel = AllModels[RNG:NextInteger(1, #AllModels)]
-        if not ThisModule or not ThisModel then continue end
+        local ThisPickup = Assets.Maps[MapName].Pickups[TypeName] :: Model
+        if not ThisModule or not ThisModel or not ThisPickup then continue end
 
-        warn(3)
         local HealthRange, RespawnRange = MapInfo[MapName][TypeName .. "Health"], MapInfo[MapName][TypeName .. "Respawn"]
         if not HealthRange or not RespawnRange then continue end
 
@@ -100,6 +99,15 @@ function ResourceService.SpawnResources(MapName: string, Folder: Folder)
 
             Resources[NewModel].RespawnAt = os.clock() + RNG:NextNumber(RespawnRange.Min, RespawnRange.Max)
             Resources[NewModel].Chopped = true
+
+            local CopyPickup = ThisPickup:Clone()
+            CopyPickup:PivotTo(NewModel.PrimaryPart.CFrame * CFrame.new(0, 3, 0))
+            CopyPickup.Parent = PickupFolder
+
+            CopyPickup.PrimaryPart.AssemblyLinearVelocity = Vector3.new(
+                RNG:NextInteger(10, 15) * (RNG:NextInteger(0, 1) * 2 - 1), 
+                RNG:NextInteger(30, 40), 
+                RNG:NextInteger(10, 15) * (RNG:NextInteger(0, 1) * 2 - 1))
         end)
 
         ThisModule.Set(NewModel, MaxHealth)
@@ -156,6 +164,8 @@ function ResourceService:Init()
 end
 
 function ResourceService.Deferred()
+    PickupFolder = New.Instance("Folder", Workspace, "Pickups")
+
     CheckForTestMap()
     ResourceService.Run()
 end

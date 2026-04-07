@@ -71,6 +71,9 @@ local function DestroyAnimation(Model: Model, Tweens: {Tween})
 
     Debris:AddItem(Copy, 3) -- Incase they somehow don't fall into the abyss
 
+    Top.CanCollide = false
+    Top.CanQuery = false
+    Top.CanTouch = false
     Top.Transparency = 1
 
     task.wait(0.25)
@@ -86,6 +89,9 @@ local function RespawnAnimation(Model: Model, Tweens: {Tween})
     if not Top then return end
 
     local OriginalSize = Top.Size
+    Top.CanCollide = true
+    Top.CanQuery = true
+    Top.CanTouch = true
     Top.Size = Vector3.new(0.1, 0.1, 0.1)
     Top.Transparency = 0
         
