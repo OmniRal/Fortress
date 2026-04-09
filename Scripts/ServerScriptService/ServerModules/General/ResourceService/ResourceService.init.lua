@@ -40,10 +40,11 @@ local SPAWN_TEST_RESOURCES = true
 local RunConnection: thread? = nil
 
 local Resources: {
-    [Model]: {MaxHealth: number, Chopped: boolean, RespawnAt: number}
+    [Model]: {MaxHealth: number, Chopped: boolean, RespawnAt: number, TowerPlaced: boolean?}
 } = {}
 
-local PickupFolder: Folder
+local ResourcesFolder: Folder
+local PickupsFolder: Folder
 local Assets = ServerStorage.Assets
 local RNG = Random.new()
 
@@ -63,6 +64,19 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Public API
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Destroys a resource where a tower is going to be placed
+function ResourceService.PlaceTowerOnResource(ThisModel: Model): {Tree: number, Rock: number, Crystal: number}?
+    local ThisTree = Resources[ThisModel]
+    if not ThisTree then return end
+    if not string.find(ThisModel.Name, "Tree") then return end -- Right now it only works on trees
+
+    ThisTree.TowerPlaced = true
+    ThisModel:SetAttribute("TowerPlaced", true) -- Prevents it from spawning pick ups
+    ThisModel:SetAttribute("Health", 0)
+
+    return {Tree = 0, Rock = 0, Crystal = 0}
+end
 
 -- Spawn the resources for one specific map
 function ResourceService.SpawnResources(MapName: string, Folder: Folder)
@@ -87,22 +101,27 @@ function ResourceService.SpawnResources(MapName: string, Folder: Folder)
 
         local NewModel = ThisModel:Clone() :: Model
         NewModel:PivotTo(Spawn.CFrame * CFrame.new(0, -0.5, 0))
-        NewModel.Parent = Workspace
+        NewModel.Parent = ResourcesFolder
 
         NewModel:SetAttribute("Ready", false)
         NewModel:SetAttribute("Health", MaxHealth)
         NewModel:SetAttribute("AnimationRunning", false)
+        if TypeName == "Tree" then
+            NewModel:SetAttribute("TowerPlaced", false)
+        end
 
         NewModel:GetAttributeChangedSignal("Health"):Connect(function()
             if NewModel:GetAttribute("Health") > 0 then return end
             if not Resources[NewModel] then return end
+
+            if NewModel:GetAttribute("TowerPlaced") then return end
 
             Resources[NewModel].RespawnAt = os.clock() + RNG:NextNumber(RespawnRange.Min, RespawnRange.Max)
             Resources[NewModel].Chopped = true
 
             local CopyPickup = ThisPickup:Clone()
             CopyPickup:PivotTo(NewModel.PrimaryPart.CFrame * CFrame.new(0, 3, 0))
-            CopyPickup.Parent = PickupFolder
+            CopyPickup.Parent = PickupsFolder
 
             CopyPickup.PrimaryPart.AssemblyLinearVelocity = Vector3.new(
                 RNG:NextInteger(10, 15) * (RNG:NextInteger(0, 1) * 2 - 1), 
@@ -135,6 +154,8 @@ function ResourceService.Run()
             
             for Model, Data in Resources do
                 if not Model or not Data then continue end
+
+                if not Data.TowerPlaced then continue end
                 if not Data.Chopped then continue end
 
                 if os.clock() < Data.RespawnAt then continue end
@@ -164,7 +185,8 @@ function ResourceService:Init()
 end
 
 function ResourceService.Deferred()
-    PickupFolder = New.Instance("Folder", Workspace, "Pickups")
+    ResourcesFolder = New.Instance("Folder", Workspace, "Resources")
+    PickupsFolder = New.Instance("Folder", Workspace, "Pickups")
 
     CheckForTestMap()
     ResourceService.Run()
