@@ -57,7 +57,7 @@ local function SpawnRandomTestTower()
             table.insert(Trees, Tree)
         end
 
-        TowerService.SpawnNew("TestTower", Trees[RNG:NextInteger(1, #Trees)])
+        TowerService.SpawnNew("TestTower", nil, Trees[RNG:NextInteger(1, #Trees)])
     end)
 end
 
@@ -65,19 +65,17 @@ end
 -- Public API
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function TowerService.SpawnNew(TowerName: string, ThisResource: Model?, OverrideCFrame: CFrame?)
+function TowerService.SpawnNew(TowerName: string, Player: Player?, ThisResource: Model?, OverrideCFrame: CFrame?)
     local Model, Info = SharedAssets.Towers:FindFirstChild(TowerName) :: Model, TowerInfo[TowerName]
-    warn(Model, Info)
     if not Model or not Info or (not OverrideCFrame and not ThisResource) then return end
-    warn(2)
 
     local PlaceHere = if ThisResource then ThisResource:GetPivot() else OverrideCFrame
+    local BuildCost = Info.BuildCost
 
     if ThisResource then
-        local CostReduction = ResourceService.PlaceTowerOnResource(ThisResource)
+        local CostReduction = ResourceService.PlaceTowerOnResource(ThisResource, BuildCost)
         if not CostReduction then return end
 
-        warn(3)
     end
 
     local NewModel = Model:Clone()

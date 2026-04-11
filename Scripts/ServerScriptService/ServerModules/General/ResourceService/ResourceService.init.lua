@@ -8,6 +8,7 @@ local ResourceService = {}
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
+local ServerScriptService = game:GetService("ServerScriptService")
 local ServerStorage = game:GetService("ServerStorage")
 local Workspace = game:GetService("Workspace")
 local MapInfo = require(ReplicatedStorage.Source.SharedModules.Info.MapInfo)
@@ -17,6 +18,9 @@ local MapInfo = require(ReplicatedStorage.Source.SharedModules.Info.MapInfo)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 local New = require(ReplicatedStorage.Source.Pronghorn.New)
+
+local CoreGameService = require(ServerScriptService.Source.ServerModules.Top.CoreGameService)
+
 local ResourceModules = {
     Tree = {},
     Rock = {},
@@ -43,8 +47,9 @@ local Resources: {
     [Model]: {MaxHealth: number, Chopped: boolean, RespawnAt: number, TowerPlaced: boolean?}
 } = {}
 
-local ResourcesFolder: Folder
-local PickupsFolder: Folder
+local ResourcesFolder: Folder -- Contains the tree, rock and crystal models
+local PickupsFolder: Folder -- Contains the pieces of wood, rock and crystal the player can pick up
+
 local Assets = ServerStorage.Assets
 local RNG = Random.new()
 
@@ -66,7 +71,9 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Destroys a resource where a tower is going to be placed
-function ResourceService.PlaceTowerOnResource(ThisModel: Model): {Tree: number, Rock: number, Crystal: number}?
+-- @ThisModel = The model of the tree, rock or crystal being used to place the tree on
+-- @UsePlayerResources = Instead of using the teams resource pool to pay the cost, it pulls from the players'
+function ResourceService.PlaceTowerOnResource(ThisModel: Model, BuildCost: {Tree: number, Rock: number, Crystal: number}, UsePlayerResources: boolean?)
     local ThisTree = Resources[ThisModel]
     if not ThisTree then return end
     if not string.find(ThisModel.Name, "Tree") then return end -- Right now it only works on trees
@@ -74,8 +81,6 @@ function ResourceService.PlaceTowerOnResource(ThisModel: Model): {Tree: number, 
     ThisTree.TowerPlaced = true
     ThisModel:SetAttribute("TowerPlaced", true) -- Prevents it from spawning pick ups
     ThisModel:SetAttribute("Health", 0)
-
-    return {Tree = 0, Rock = 0, Crystal = 0}
 end
 
 -- Spawn the resources for one specific map

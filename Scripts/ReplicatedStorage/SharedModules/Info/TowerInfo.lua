@@ -9,8 +9,10 @@ local TowerInfo: {[string]: {
     DisplayName: string,
 
     Stats: {
-        {Damage: number, Range: number, Cooldown: number}
+        {Damage: number, Range: number, Cooldown: number, UpgradeCost: {Tree: number, Rock: number, Crystal: number}}
     },
+
+    BuildCost: {Tree: number, Rock: number, Crystal: number},
 
     BuildTimeline: CustomEnum.BuildTimeline,
 }} = {}
@@ -19,10 +21,12 @@ TowerInfo["TestTower"] = {
     DisplayName = "Test Tower",
     
     Stats = {
-        {Damage = 10, Range = 40, Cooldown = 1},
-        {Damage = 15, Range = 50, Cooldown = 0.75},
-        {Damage = 20, Range = 60, Cooldown = 0.5}
+        {Damage = 10, Range = 40, Cooldown = 1, UpgradeCost = {Tree = 1, Rock = 1, Crystal = 1}},
+        {Damage = 15, Range = 50, Cooldown = 0.75, UpgradeCost = {Tree = 1, Rock = 1, Crystal = 1}},
+        {Damage = 20, Range = 60, Cooldown = 0.5, UpgradeCost = {Tree = 1, Rock = 1, Crystal = 1}}
     },
+
+    BuildCost = {Tree = 2, Rock = 3, Crystal = 1},
 
     BuildTimeline = {
         MaxKeyframes = 45,
@@ -58,6 +62,7 @@ TowerInfo["TestTower"] = {
     }
 }
 
+--[[
 TowerInfo["TestTower_Old"] = {
     DisplayName = "Test Tower",
 
@@ -123,5 +128,6 @@ TowerInfo["TestTower_Old"] = {
         }
     }
 }
+]]
 
 return TowerInfo
